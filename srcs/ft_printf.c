@@ -26,6 +26,13 @@
 ** 0 : fill up 0 if there is space
 */
 
+/*
+** precision
+** zero
+** minus
+** star
+*/
+
 #include "ft_printf.h"
 
 int	ft_printf(const char *form, ...)
