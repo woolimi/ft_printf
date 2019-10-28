@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/21 12:51:38 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/21 13:34:55 by wpark            ###   ########.fr       */
+/*   Created: 2019/10/08 15:19:33 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/11 10:44:35 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINT_F
-# define FT_PRINT_F
+#include "libft.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-
-/*
-**	%5.5d
-**
-**	precision	: nb after point
-**	zero		: 
-*/
-
-typedef struct	s_pl
+int	ft_isdigit(int c)
 {
-	int			start;
-	int			min_w;
-	int			minus;
-	char		convert;
-	char		*form;
-}				t_pl;
-
-int		ft_printf(const char *form, ...);
-int 	check_form(char *f);
-int     check_flag(char c);
-#endif
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}

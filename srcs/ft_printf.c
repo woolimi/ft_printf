@@ -35,23 +35,53 @@
 
 #include "ft_printf.h"
 
-int	is_percent(char c)
+void	put_minus_into_pl(t_pl *pl, char *form)
 {
-	if (c == '%')
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (form[i] != '\0')
+	{
+		if (check_conversion(form[i]))
+			break;
+		if (form[i] == '-')
+		{
+			pl->minus = 1;
+		}
+		i++;
+	}
+}
+void	init_pl(t_pl *pl)
+{
+	pl->convert = 0;
+	pl->
 }
 
 int	ft_printf(const char *form, ...)
 {
 	int		i;
-	t_plst	**pl;
+	int		cnt;
+	t_pl	pl;
 	va_list	ap;
 
-	i = 0;
-	va_start(ap, form);
-	if (!(pl = make_print_list(form)))
+	if (check_form(form) == -1)
 		return (0);
+	i = 0;
+	cnt = 0;
+	va_start(ap, form);
+	while (form[i] != '\0')
+	{
+		if (form[i] == '%' && (i > 0 && form[i - 1] != '%') && form[i + 1] != '%')
+		{
+			init_pl(&pl);
+			put_minus_into_pl(&pl, form + i);
+			ft_isdigit(form[i])
+			cnt = cnt + print(pl, ap);
+		}
+		write(1, &form[i], 1);
+		cnt++;
+		i++;
+	}
 	va_end(ap);
 	return (0);
 }

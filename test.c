@@ -68,6 +68,6 @@ int	main(void)
 	printf("--%4.8s--\n", "hel"); // res -- hel--
 	// minimun width : 4, maximun width : 8, if bigger than max, crop it.
 
-	printf("%%%");
+	printf("res = |%--10d|\n", printf("%d\n", 10));
 	return (0);
 }

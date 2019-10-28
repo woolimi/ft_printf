@@ -12,11 +12,11 @@
 
 #include "../include/ft_printf.h"
 
-int check_flag(char c)
+int check_conversion(char c)
 {
     if (c == 'c' || c == 's' || c == 'p' || c == 'd'
             || c == 'i' || c == 'u' || c == 'x' || c == 'X')
-        return (1);
+        return (c);
     return (0);
 }
 
