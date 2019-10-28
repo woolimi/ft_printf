@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I./include -c
+CFLAGS = -Wall -Wextra -Werror -c
 
 SRC_PATH = ./srcs
 LIB_PATH = ./lib

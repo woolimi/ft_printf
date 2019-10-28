@@ -16,8 +16,19 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
-typedef	char* va_list;
+/*
+**	%5.5d
+**
+**	precision	: nb after point
+**	zero		: 
+*/
+
+typedef struct	s_plst
+{
+    char		*form;
+}				t_plst;
 
 int		ft_printf(const char *form, ...);
-
+int 	check_form(char *f);
+int     check_flag(char c);
 #endif

@@ -35,13 +35,23 @@
 
 #include "ft_printf.h"
 
+int	is_percent(char c)
+{
+	if (c == '%')
+		return (1);
+	return (0);
+}
+
 int	ft_printf(const char *form, ...)
 {
+	int		i;
+	t_plst	**pl;
 	va_list	ap;
 
+	i = 0;
 	va_start(ap, form);
-
-	form = 0;
+	if (!(pl = make_print_list(form)))
+		return (0);
 	va_end(ap);
 	return (0);
 }

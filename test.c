@@ -40,7 +40,7 @@ void	test(char *form, ...)
 int	main(void)
 {
 	// conversions : c s p d i u x X %
-
+/*
 	// 1. minimun width
 	printf("--%3c--\n", 'c');
 	printf("--%3s--\n", "hi");
@@ -57,16 +57,17 @@ int	main(void)
 	printf("--%04d--\n", 10); // res --0010--
 	printf("--%04x--\n", 10); // res ==000a--
 	printf("--%-010s--\n", "padding?");
-/*
+*/
 	// 4. precision
 	printf("--%.5d--\n", 1234); //minimal nb of digit to be writte
 	printf("--%10.5d--\n", 1234);  // res --     01234--
 	// minimun width + minimun nb of digit
-	printf("--%0.5d--\n", 0); //minimal nb of digit to be writte
+	printf("--%2.01d--\n", 123);
+	//점 앞의 숫자는 최소 공간을 의미함
+	//최소 5개의 숫자를 표시한다. 5개가 안되면 0으로 채운다.
 	printf("--%4.8s--\n", "hel"); // res -- hel--
 	// minimun width : 4, maximun width : 8, if bigger than max, crop it.
 
-*/
-//	test("", 0xff, "test");
+	printf("%%%");
 	return (0);
 }
