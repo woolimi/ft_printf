@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -c
+CFLAGS = -Wall -Wextra -Werror -c -I$(INC_PATH)
 
 SRC_PATH = ./srcs
 LIB_PATH = ./lib
@@ -9,9 +9,14 @@ INC_PATH = ./include
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
-SRC_NAME = ft_printf.c
+SRC_NAME = ft_printf.c \
+		aux_check.c \
+		aux_pl.c \
+		aux_print_and_count.c \
+		print_c.c \
+		aux_sp_malloc.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LIB_NAME = 
+LIB_NAME = ft_isdigit.c
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))

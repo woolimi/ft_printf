@@ -15,6 +15,8 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
 /*
 **	%5.5d
@@ -25,14 +27,20 @@
 
 typedef struct	s_pl
 {
-	int			start;
+	int			f_minus;
+	int			f_zpad;
+	int			f_dot;
 	int			min_w;
-	int			minus;
+	int			precise;
 	char		convert;
-	char		*form;
 }				t_pl;
 
 int		ft_printf(const char *form, ...);
 int 	check_form(char *f);
-int     check_flag(char c);
+int     check_conversion(char c);
+void	init_pl(t_pl *pl);
+int		make_pl(t_pl *pl, char *form, va_list *ap);
+int		print_and_count(t_pl pl, va_list *ap);
+int 	print_c(t_pl pl, va_list *ap);
+char	*sp_malloc(int size);
 #endif

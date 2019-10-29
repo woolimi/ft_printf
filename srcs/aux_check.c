@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   aux_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/25 17:10:11 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/25 17:10:13 by wpark            ###   ########.fr       */
+/*   Created: 2019/10/29 11:20:51 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/29 11:20:52 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 int check_conversion(char c)
 {
@@ -39,7 +39,7 @@ int check_form(char *f)
 			ck = 0;
 		else if (*f == '%' && st_form == 1 && *(f - 1) != '%')
 			return (-1);
-        else if (st_form == 1 && check_flag(*f) && !(st_form = 0) && !(ck = 0))
+        else if (st_form == 1 && check_conversion(*f) && !(st_form = 0) && !(ck = 0))
 			cnt++;
 		f++;
     }

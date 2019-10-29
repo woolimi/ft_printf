@@ -24,18 +24,18 @@
 ** star
 */
 
-void	test(char *form, ...)
-{
-	va_list ap;
+// void	test(char *form, ...)
+// {
+// 	va_list ap;
 
-	va_start(ap, form);
-	int res = va_arg(ap, int);
-	printf("%d\n", res);
+// 	va_start(ap, form);
+// 	int res = va_arg(ap, int);
+// 	printf("%d\n", res);
 	
-	int res2 = va_arg(ap, int);
-	printf("%d\n", res2);
-	va_end(ap);
-}
+// 	int res2 = va_arg(ap, int);
+// 	printf("%sd\n", res2);
+// 	va_end(ap);
+// }
 
 int	main(void)
 {
@@ -59,15 +59,16 @@ int	main(void)
 	printf("--%-010s--\n", "padding?");
 */
 	// 4. precision
-	printf("--%.5d--\n", 1234); //minimal nb of digit to be writte
-	printf("--%10.5d--\n", 1234);  // res --     01234--
-	// minimun width + minimun nb of digit
-	printf("--%2.01d--\n", 123);
-	//점 앞의 숫자는 최소 공간을 의미함
-	//최소 5개의 숫자를 표시한다. 5개가 안되면 0으로 채운다.
-	printf("--%4.8s--\n", "hel"); // res -- hel--
-	// minimun width : 4, maximun width : 8, if bigger than max, crop it.
-
-	printf("res = |%--10d|\n", printf("%d\n", 10));
+	// printf("--%.5d--\n", 1234); //minimal nb of digit to be writte
+	// printf("--%10.5d--\n", 1234);  // res --     01234--
+	// // minimun width + minimun nb of digit
+	// printf("--%2.01d--\n", 123);
+	// //점 앞의 숫자는 최소 공간을 의미함
+	// //최소 5개의 숫자를 표시한다. 5개가 안되면 0으로 채운다.
+	// printf("--%4.8s--\n", "hel"); // res -- hel--
+	// // minimun width : 4, maximun width : 8, if bigger than max, crop it.
+	
+	//5. star
+	printf("res = |%.1c|\n", 'a'); // 10개의 자리에 최소 3개의 숫자를 표현s
 	return (0);
 }
