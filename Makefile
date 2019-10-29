@@ -14,9 +14,11 @@ SRC_NAME = ft_printf.c \
 		aux_pl.c \
 		aux_print_and_count.c \
 		print_c.c \
+		print_s.c \
 		aux_sp_malloc.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
-LIB_NAME = ft_isdigit.c
+LIB_NAME = ft_isdigit.c \
+		ft_strlen.c
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))

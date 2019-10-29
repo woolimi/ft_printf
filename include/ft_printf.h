@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include "libft.h"
 
 /*
 **	%5.5d
@@ -38,9 +39,11 @@ typedef struct	s_pl
 int		ft_printf(const char *form, ...);
 int 	check_form(char *f);
 int     check_conversion(char c);
-void	init_pl(t_pl *pl);
 int		make_pl(t_pl *pl, char *form, va_list *ap);
 int		print_and_count(t_pl pl, va_list *ap);
 int 	print_c(t_pl pl, va_list *ap);
+int		print_s(t_pl pl, va_list *ap);
 char	*sp_malloc(int size);
+void	free_all(void *ptr);
+
 #endif

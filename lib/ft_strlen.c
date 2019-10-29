@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 11:59:14 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/29 11:59:16 by wpark            ###   ########.fr       */
+/*   Created: 2019/10/11 10:33:41 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/11 10:33:44 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
 
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-
-#endif
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len] != 0)
+		len++;
+	return (len);
+}

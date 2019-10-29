@@ -34,5 +34,6 @@ int print_c(t_pl pl, va_list *ap)
 	else
 		ret[pl.min_w - 1] = c;
 	write(1, ret, pl.min_w);
+	free_all(ret);
 	return (pl.min_w);
 }

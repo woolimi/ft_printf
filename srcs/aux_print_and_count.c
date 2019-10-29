@@ -16,5 +16,7 @@ int print_and_count(t_pl pl, va_list *ap)
 {
     if (pl.convert == 'c')
         return (print_c(pl, ap));
+    if (pl.convert == 's')
+        return (print_s(pl, ap));
     return (0);
 }

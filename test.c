@@ -24,18 +24,15 @@
 ** star
 */
 
-// void	test(char *form, ...)
-// {
-// 	va_list ap;
+void	test(char *form, ...)
+{
+	va_list ap;
 
-// 	va_start(ap, form);
-// 	int res = va_arg(ap, int);
-// 	printf("%d\n", res);
-	
-// 	int res2 = va_arg(ap, int);
-// 	printf("%sd\n", res2);
-// 	va_end(ap);
-// }
+	va_start(ap, form);
+	char *res = va_arg(ap, char*);
+	printf("%s\n", res);
+	va_end(ap);
+}
 
 int	main(void)
 {
@@ -67,8 +64,6 @@ int	main(void)
 	// //최소 5개의 숫자를 표시한다. 5개가 안되면 0으로 채운다.
 	// printf("--%4.8s--\n", "hel"); // res -- hel--
 	// // minimun width : 4, maximun width : 8, if bigger than max, crop it.
-	
-	//5. star
-	printf("res = |%.1c|\n", 'a'); // 10개의 자리에 최소 3개의 숫자를 표현s
+	printf("|%15.7s|", "tes");
 	return (0);
 }

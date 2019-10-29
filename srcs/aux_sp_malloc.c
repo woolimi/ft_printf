@@ -12,16 +12,23 @@
 
 #include "ft_printf.h"
 
+void    free_all(void *ptr)
+{
+	if (ptr)
+		free(ptr);
+	ptr = 0;
+}
+
 char    *sp_malloc(int size)
 {
-    char    *ret;
-    int     i;
+	char    *ret;
+	int     i;
 
-    if (!(ret = (char*)malloc(sizeof(char) * (size + 1))))
-        return (0);
-    i = 0;
-    while (size--)
-        ret[i++] = ' ';
-    ret[i] = '\0';
-    return (ret);
+	if (!(ret = (char*)malloc(sizeof(char) * (size + 1))))
+		return (0);
+	i = 0;
+	while (size--)
+		ret[i++] = ' ';
+	ret[i] = '\0';
+	return (ret);
 }
