@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_print_and_count.c                              :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 11:22:29 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/29 11:22:32 by wpark            ###   ########.fr       */
+/*   Created: 2019/10/29 16:52:31 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/29 16:52:32 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int print_and_count(t_pl pl, va_list *ap)
+/*
+** %-10c (o)
+** %10c (o)
+** %010c (x)
+** %.c (x)
+*/
+
+int print_p(t_pl pl, va_list *ap)
 {
-    if (pl.convert == 'c')
-        return (print_c(pl, ap));
-    if (pl.convert == 's')
-        return (print_s(pl, ap));
-    if (pl.convert == 'p')
-        return (print_p(pl, ap));
-    return (0);
+    char *ret;
+    char c;
+
+    c = va_arg(*ap, int);
+    if (!pl.min_w)
+        pl.min_w = 1;
+    if (!(ret = sp_malloc(pl.min_w)))
+        return (0);
+    if (pl.f_minus)
+        ret[0] = c;
+    else
+        ret[pl.min_w - 1] = c;
+    write(1, ret, pl.min_w);
+    free_all(ret);
+    return (pl.min_w);
 }
