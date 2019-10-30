@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_sp_malloc.c                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wpark <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/29 14:35:30 by wpark             #+#    #+#             */
-/*   Updated: 2019/10/29 14:35:31 by wpark            ###   ########.fr       */
+/*   Created: 2019/10/11 11:15:30 by wpark             #+#    #+#             */
+/*   Updated: 2019/10/11 12:47:11 by wpark            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void    free_all(void *ptr)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	if (ptr)
-		free(ptr);
-	ptr = 0;
-}
+	unsigned int	i;
 
-char    *sp_malloc(int size)
-{
-	char    *ret;
-	int     i;
-
-	if (!(ret = (char*)malloc(sizeof(char) * (size + 1))))
-		return (0);
 	i = 0;
-	while (size--)
-		ret[i++] = ' ';
-	ret[i] = '\0';
-	return (ret);
+	if (dstsize > 0)
+	{
+		while (--dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	while (src[i])
+		i++;
+	return (i);
 }

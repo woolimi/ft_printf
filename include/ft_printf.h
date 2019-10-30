@@ -47,7 +47,7 @@ int		print_p(t_pl pl, va_list *ap);
 int		print_d(t_pl pl, va_list *ap);
 int		print_u(t_pl pl, va_list *ap);
 int		print_x(t_pl pl, va_list *ap);
-char	*sp_malloc(int size);
+char	*sp_malloc(int size, char op);
 void	free_all(void *ptr);
 
 #endif

@@ -25,7 +25,12 @@ static char	*copy_to_ret(unsigned int size, unsigned int len, char *s, t_pl pl)
 	unsigned int	space;
 	unsigned int	i;
 
-	ret = sp_malloc(size);
+	if (!s)
+		ret = sp_malloc((size = 6), 'n');
+	else
+		ret = sp_malloc(size, 'y');
+	if (!ret)
+		return (0);
 	i = 0;
 	if (pl.f_minus)
 		while (len--)
@@ -53,6 +58,8 @@ int			print_s(t_pl pl, va_list *ap)
 	int		size;
 
 	s = va_arg(*ap, char*);
+	if (!s)
+		return (print_null());
 	len = ft_strlen(s);
 	len = (pl.precise && len > pl.precise) ? pl.precise : len;
 	size = (len > pl.min_w) ? len : pl.min_w;

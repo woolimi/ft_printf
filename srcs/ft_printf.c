@@ -20,7 +20,7 @@ int	ft_printf(const char *form, ...)
 	va_list	ap;
 	char*	f;
 
-	f = (char*)form;
+	f = (char *)form;
 	if (check_form(f) == -1)
 		return (0);
 	i = -1;

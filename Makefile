@@ -18,8 +18,7 @@ SRC_NAME = ft_printf.c \
 		print_p.c \
 		print_d.c \
 		print_u.c \
-		print_x.c \
-		aux_sp_malloc.c
+		print_x.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = ft_isdigit.c \
 		ft_strlen.c \

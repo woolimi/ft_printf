@@ -12,17 +12,54 @@
 
 #include "ft_printf.h"
 
+static char *ret_null(void)
+{
+	write(1, "(null)", 6);
+	return (6);
+}
+
+void free_all(void *ptr)
+{
+	if (ptr)
+		free(ptr);
+	ptr = 0;
+}
+
+char *sp_malloc(int size, int op)
+{
+	char *ret;
+	int i;
+	
+	if (op == 'n')
+	{
+		ret = (char*)malloc(sizeof(char) * (size + 1));
+		ft_strcpy(ret, "(null)");
+	}
+	else
+	{
+		/* code */
+	}
+	
+	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
+		return (0);
+	i = 0;
+	while (size--)
+		ret[i++] = ' ';
+	ret[i] = '\0';
+	return (ret);
+}
+
 int print_and_count(t_pl pl, va_list *ap)
 {
-    if (pl.convert == 'c')
-        return (print_c(pl, ap));
-    if (pl.convert == 's')
-        return (print_s(pl, ap));
-    if (pl.convert == 'p')
-        return (print_p(pl, ap));
-    if (pl.convert == 'd' || pl.convert == 'i')
-        return (print_d(pl, ap));
-    if (pl.convert == 'x' || pl.convert == 'X')
-        return (print_x(pl, ap));
-    return (0);
+	if (pl.convert == 'c')
+		return (print_c(pl, ap));
+	if (pl.convert == 's')
+		return (print_s(pl, ap));
+	if (pl.convert == 'p')
+		return (print_p(pl, ap));
+	if (pl.convert == 'd' || pl.convert == 'i')
+		return (print_d(pl, ap));
+	if (pl.convert == 'x' || pl.convert == 'X')
+		return (print_x(pl, ap));
+	return (0);
 }
