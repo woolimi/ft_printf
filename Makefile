@@ -16,10 +16,15 @@ SRC_NAME = ft_printf.c \
 		print_c.c \
 		print_s.c \
 		print_p.c \
+		print_d.c \
+		print_u.c \
+		print_x.c \
 		aux_sp_malloc.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = ft_isdigit.c \
-		ft_strlen.c
+		ft_strlen.c \
+		ft_itoa_base.c \
+		ft_utoa_base.c
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))

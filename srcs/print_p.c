@@ -12,28 +12,46 @@
 
 #include "ft_printf.h"
 
-/*
-** %-10c (o)
-** %10c (o)
-** %010c (x)
-** %.c (x)
-*/
-
-int print_p(t_pl pl, va_list *ap)
+static void	print_ptr(char *ptr)
 {
-    char *ret;
-    char c;
+	write(1, "0x", 2);
+	write(1, ptr, ft_strlen(ptr));
+}
 
-    c = va_arg(*ap, int);
-    if (!pl.min_w)
-        pl.min_w = 1;
-    if (!(ret = sp_malloc(pl.min_w)))
-        return (0);
-    if (pl.f_minus)
-        ret[0] = c;
-    else
-        ret[pl.min_w - 1] = c;
-    write(1, ret, pl.min_w);
-    free_all(ret);
-    return (pl.min_w);
+static void	print_res(char *ptr, t_pl pl, int sp)
+{
+	if (pl.f_minus)
+	{
+		print_ptr(ptr);
+		while (sp--)
+			write(1, " ", 1);
+	}
+	else
+	{
+		while (sp--)
+		{
+			if (pl.f_zpad)
+				write(1, "0", 1);
+			else
+				write(1, " ", 1);
+		}
+		print_ptr(ptr);
+	}
+}
+
+int			print_p(t_pl pl, va_list *ap)
+{
+	long	n;
+	char	*ret;
+	int		size;
+	int		len;
+
+	n = (unsigned long)va_arg(*ap, void*);
+	if (!(ret = ft_itoa_base(n, "0123456789abcdef", 16)))
+		return (0);
+	len = ft_strlen(ret) + 2;
+	size = (len > pl.min_w) ? len : pl.min_w;
+	print_res(ret, pl, size - len);
+	free_all(ret);
+	return (size);
 }

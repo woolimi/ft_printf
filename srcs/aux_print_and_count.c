@@ -20,5 +20,9 @@ int print_and_count(t_pl pl, va_list *ap)
         return (print_s(pl, ap));
     if (pl.convert == 'p')
         return (print_p(pl, ap));
+    if (pl.convert == 'd' || pl.convert == 'i')
+        return (print_d(pl, ap));
+    if (pl.convert == 'x' || pl.convert == 'X')
+        return (print_x(pl, ap));
     return (0);
 }
