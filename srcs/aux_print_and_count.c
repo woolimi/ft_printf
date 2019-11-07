@@ -12,12 +12,6 @@
 
 #include "ft_printf.h"
 
-static char *ret_null(void)
-{
-	write(1, "(null)", 6);
-	return (6);
-}
-
 void free_all(void *ptr)
 {
 	if (ptr)
@@ -25,27 +19,25 @@ void free_all(void *ptr)
 	ptr = 0;
 }
 
-char *sp_malloc(int size, int op)
+char *sp_malloc(int size, char op)
 {
-	char *ret;
-	int i;
+	char	*ret;
+	int		i;
 	
 	if (op == 'n')
 	{
 		ret = (char*)malloc(sizeof(char) * (size + 1));
-		ft_strcpy(ret, "(null)");
+		ft_strlcpy(ret, "(null)", 7);
 	}
 	else
 	{
-		/* code */
+		if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
+			return (0);
+		i = 0;
+		while (size--)
+			ret[i++] = ' ';
+		ret[i] = '\0';
 	}
-	
-	if (!(ret = (char *)malloc(sizeof(char) * (size + 1))))
-		return (0);
-	i = 0;
-	while (size--)
-		ret[i++] = ' ';
-	ret[i] = '\0';
 	return (ret);
 }
 

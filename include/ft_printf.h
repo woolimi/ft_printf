@@ -38,7 +38,8 @@ typedef struct	s_pl
 
 int		ft_printf(const char *form, ...);
 int 	check_form(char *f);
-int     check_conversion(char c);
+int		check_minus(char c);
+int		check_conversion(char c);
 int		make_pl(t_pl *pl, char *form, va_list *ap);
 int		print_and_count(t_pl pl, va_list *ap);
 int 	print_c(t_pl pl, va_list *ap);

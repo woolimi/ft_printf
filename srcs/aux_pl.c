@@ -18,49 +18,71 @@ static void	init_pl(t_pl *pl)
 	pl->f_zpad = 0;
 	pl->f_dot = 0;
 	pl->min_w = 0;
-	pl->precise = 0;
+	pl->precise = -1;
 	pl->convert = 0;
 }
 
-int			get_num(char **form, va_list *ap)
+static void	get_min_w(t_pl *pl, char **form, va_list *ap)
 {
 	int	digit;
 
-	if (**form == '*')
+	digit = 0;
+	while (**form != '.' && !check_conversion(**form))
 	{
-		digit = va_arg(*ap, int);
+		if (**form == '-' && (pl->f_minus = 1))
+		{
+			if (digit != 0)
+				pl->min_w = digit;
+			digit = 0;
+		}
+		else if (ft_isdigit(**form))
+			digit = (digit * 10) + (**form - '0');
+		else if (**form == '*')
+		{
+			pl->min_w = va_arg(*ap, int);
+			digit = 0;
+		}
 		(*form)++;
 	}
-	else
-	{
-		digit = 0;
-		while (ft_isdigit(**form))
-		{
-			digit = (digit * 10) + (**form - '0');
-			(*form)++;
-		}
-	}
-	return (digit);
+	pl->min_w = (digit) ? digit : pl->min_w;
 }
 
+static void get_precision(t_pl *pl, char **form, va_list *ap)
+{
+	int digit;
 
-//precision 이 있으면 zero_pad 작동 안함
+	digit = 0;
+	while (!check_conversion(**form))
+	{
+		if (**form == '-' && (pl->f_minus = 1))
+		{
+			if (digit != 0)
+				pl->precise = digit;
+			digit = 0;
+		}
+		else if (**form == '0')
+			pl->f_zpad = 1;
+		else if (ft_isdigit(**form))
+			digit = (digit * 10) + (**form - '0');
+		else if (**form == '*')
+		{
+			pl->min_w = va_arg(*ap, int);
+			digit = 0;
+		}
+		(*form)++;
+	}
+	pl->precise = digit;
+}
+
 int			make_pl(t_pl *pl, char *form, va_list *ap)
 {
 	char	*begin;
 
 	begin = form;
 	init_pl(pl);
-	while (*form == ' ' && form++)
-		;
-	while (*form == '-' && form++)
-		pl->f_minus = 1;
-	while (*form == '0' && form++)
-		pl->f_zpad = 1;
-	pl->min_w = get_num(&form, ap);
-	if (*form == '.' && form++)
-		pl->f_dot = 1;
-	pl->precise = get_num(&form, ap);
+	get_min_w(pl, &form, ap);
+	if (*form == '.')
+		get_precision(pl, &form, ap);
 	pl->convert = *form++;
 	return (form - begin);
 }

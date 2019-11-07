@@ -12,6 +12,13 @@
 
 #include "ft_printf.h"
 
+int check_minus(char c)
+{
+    if (c == '-')
+        return (1);
+    return (0);
+}
+
 int check_conversion(char c)
 {
     if (c == 'c' || c == 's' || c == 'p' || c == 'd'

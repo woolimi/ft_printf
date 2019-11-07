@@ -22,6 +22,7 @@ SRC_NAME = ft_printf.c \
 OBJ_NAME = $(SRC_NAME:.c=.o)
 LIB_NAME = ft_isdigit.c \
 		ft_strlen.c \
+		ft_strlcpy.c \
 		ft_itoa_base.c \
 		ft_utoa_base.c
 OBJLIB_NAME = $(LIB_NAME:.c=.o)

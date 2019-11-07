@@ -27,7 +27,7 @@ int print_c(t_pl pl, va_list *ap)
 	c = va_arg(*ap, int);
 	if (!pl.min_w)
 		pl.min_w = 1;
-	if (!(ret = sp_malloc(pl.min_w)))
+	if (!(ret = sp_malloc(pl.min_w, 'c')))
 		return (0);
 	if (pl.f_minus)
 		ret[0] = c;
