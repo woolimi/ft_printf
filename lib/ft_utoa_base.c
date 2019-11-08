@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	len_nbr_by_base(unsigned long nbr, int b_len)
+static int	len_nbr_by_base(unsigned int nbr, int b_len)
 {
 	int cnt;
 
@@ -34,7 +34,7 @@ static void	put_null_and_sign(char *res, int len, int sign)
 		res[0] = '-';
 }
 
-char		*ft_utoa_base(unsigned long n, char *base, int b_len)
+char		*ft_utoa_base(unsigned int n, char *base, int b_len)
 {
 	char			*res;
 	int				len;

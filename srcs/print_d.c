@@ -26,7 +26,14 @@ static int	print_without_fminus(char *ret, t_pl pl, int sign)
 	size = ((p_len + sign > pl.min_w) ? p_len + sign : pl.min_w);
 	i = size - p_len - sign;
 	while (i--)
-		write(1, " ", 1);
+	{
+		if (pl.precise != -1)
+			write(1, " ", 1);
+		else if (pl.f_zpad == 1)
+			write(1, "0", 1);
+		else
+			write(1, " ", 1);
+	}
 	if (sign)
 		write(1, &*ret++, 1);
 	i = p_len - len;

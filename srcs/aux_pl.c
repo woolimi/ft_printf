@@ -27,6 +27,14 @@ static void	get_min_w(t_pl *pl, char **form, va_list *ap)
 	int	digit;
 
 	digit = 0;
+	while (**form == '-' || **form == '0')
+	{
+		if (**form == '-')
+			pl->f_minus = 1;
+		else if (**form == '0')
+			pl->f_zpad = 1;
+		(*form)++;
+	}
 	while (**form != '.' && !check_conversion(**form))
 	{
 		if (**form == '-' && (pl->f_minus = 1))
@@ -39,7 +47,11 @@ static void	get_min_w(t_pl *pl, char **form, va_list *ap)
 			digit = (digit * 10) + (**form - '0');
 		else if (**form == '*')
 		{
-			pl->min_w = va_arg(*ap, int);
+			if ((pl->min_w = va_arg(*ap, int)) < 0)
+			{
+				pl->min_w = -1 * pl->min_w;
+				pl->f_minus = 1;
+			}
 			digit = 0;
 		}
 		(*form)++;
@@ -60,14 +72,13 @@ static void get_precision(t_pl *pl, char **form, va_list *ap)
 				pl->precise = digit;
 			digit = 0;
 		}
-		else if (**form == '0')
-			pl->f_zpad = 1;
 		else if (ft_isdigit(**form))
 			digit = (digit * 10) + (**form - '0');
 		else if (**form == '*')
 		{
-			pl->min_w = va_arg(*ap, int);
-			digit = 0;
+			if ((pl->precise = va_arg(*ap, int)) < 0)
+				pl->precise = -1;
+			digit = pl->precise;
 		}
 		(*form)++;
 	}

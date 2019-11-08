@@ -27,6 +27,9 @@
 
 void test_c(void);
 void test_s(void);
+void test_p(void);
+void test_d(void);
+void test_u(void);
 
 int main(void)
 {
@@ -34,6 +37,8 @@ int main(void)
 	ft_printf("test printf\n");
 	test_c();
 	test_s();
-
+	test_p();
+	test_d();
+	test_u();
 	return (0);
 }
