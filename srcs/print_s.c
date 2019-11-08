@@ -18,7 +18,7 @@ static char	*copy_to_ret(unsigned int size, unsigned int len, char *s, t_pl pl)
 	unsigned int	space;
 	unsigned int	i;
 
-	if (!(ret = sp_malloc(size, 's')))
+	if (!(ret = sp_malloc(size)))
 		return (0);
 	i = 0;
 	if (pl.f_minus)
@@ -30,7 +30,7 @@ static char	*copy_to_ret(unsigned int size, unsigned int len, char *s, t_pl pl)
 		while (space--)
 		{
 			if (pl.f_zpad)
-				ret[i] = '0'; 
+				ret[i] = '0';
 			i++;
 		}
 		while (len--)

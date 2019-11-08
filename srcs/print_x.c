@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int print_without_fminus(char *ret, t_pl pl)
+static int	print_without_fminus(char *ret, t_pl pl)
 {
 	int len;
 	int p_len;
@@ -24,7 +24,14 @@ static int print_without_fminus(char *ret, t_pl pl)
 	size = (p_len > pl.min_w) ? p_len : pl.min_w;
 	i = size - p_len;
 	while (i--)
-		write(1, " ", 1);
+	{
+		if (pl.precise != -1)
+			write(1, " ", 1);
+		else if (pl.f_zpad == 1)
+			write(1, "0", 1);
+		else
+			write(1, " ", 1);
+	}
 	i = p_len - len;
 	while (i--)
 		write(1, "0", 1);
@@ -33,7 +40,7 @@ static int print_without_fminus(char *ret, t_pl pl)
 	return (size);
 }
 
-static int print_with_fminus(char *ret, t_pl pl)
+static int	print_with_fminus(char *ret, t_pl pl)
 {
 	int len;
 	int p_len;
@@ -54,7 +61,7 @@ static int print_with_fminus(char *ret, t_pl pl)
 	return (size);
 }
 
-static int print_res(char *ret, t_pl pl)
+static int	print_res(char *ret, t_pl pl)
 {
 	if (pl.f_minus)
 		return (print_with_fminus(ret, pl));

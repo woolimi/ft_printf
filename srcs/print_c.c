@@ -12,22 +12,15 @@
 
 #include "ft_printf.h"
 
-/*
-** %-10c (o)
-** %10c (o)
-** %010c (x)
-** %.c (x)
-*/
-
-int print_c(t_pl pl, va_list *ap)
+int	print_c(t_pl pl, va_list *ap)
 {
-	char    *ret;
-	char    c;
+	char	*ret;
+	char	c;
 
 	c = va_arg(*ap, int);
 	if (!pl.min_w)
 		pl.min_w = 1;
-	if (!(ret = sp_malloc(pl.min_w, 'c')))
+	if (!(ret = sp_malloc(pl.min_w)))
 		return (0);
 	if (pl.f_minus)
 		ret[0] = c;

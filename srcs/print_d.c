@@ -12,6 +12,16 @@
 
 #include "ft_printf.h"
 
+static void	print_pad(int precise, int f_zpad)
+{
+	if (precise != -1)
+		write(1, " ", 1);
+	else if (f_zpad == 1)
+		write(1, "0", 1);
+	else
+		write(1, " ", 1);
+}
+
 static int	print_without_fminus(char *ret, t_pl pl, int sign)
 {
 	int		len;
@@ -26,14 +36,7 @@ static int	print_without_fminus(char *ret, t_pl pl, int sign)
 	size = ((p_len + sign > pl.min_w) ? p_len + sign : pl.min_w);
 	i = size - p_len - sign;
 	while (i--)
-	{
-		if (pl.precise != -1)
-			write(1, " ", 1);
-		else if (pl.f_zpad == 1)
-			write(1, "0", 1);
-		else
-			write(1, " ", 1);
-	}
+		print_pad(pl.precise, pl.f_zpad);
 	if (sign)
 		write(1, &*ret++, 1);
 	i = p_len - len;
@@ -79,8 +82,8 @@ static int	print_res(char *ret, t_pl pl, int sign)
 
 int			print_d(t_pl pl, va_list *ap)
 {
-	char    *ret;
-	int     d;
+	char	*ret;
+	int		d;
 	int		sign;
 
 	d = va_arg(*ap, int);

@@ -10,21 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINT_F
-# define FT_PRINT_F
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include "libft.h"
-
-/*
-**	%5.5d
-**
-**	precision	: nb after point
-**	zero		: 
-*/
+# include <stdio.h>
 
 typedef struct	s_pl
 {
@@ -36,19 +29,19 @@ typedef struct	s_pl
 	char		convert;
 }				t_pl;
 
-int		ft_printf(const char *form, ...);
-int 	check_form(char *f);
-int		check_minus(char c);
-int		check_conversion(char c);
-int		make_pl(t_pl *pl, char *form, va_list *ap);
-int		print_and_count(t_pl pl, va_list *ap);
-int 	print_c(t_pl pl, va_list *ap);
-int		print_s(t_pl pl, va_list *ap);
-int		print_p(t_pl pl, va_list *ap);
-int		print_d(t_pl pl, va_list *ap);
-int		print_u(t_pl pl, va_list *ap);
-int		print_x(t_pl pl, va_list *ap);
-char	*sp_malloc(int size, char op);
-void	free_all(void *ptr);
+int				ft_printf(const char *form, ...);
+int				check_form(char *f);
+int				check_minus(char c);
+int				check_conversion(char c);
+int				make_pl(t_pl *pl, char *form, va_list *ap);
+int				print_and_count(t_pl pl, va_list *ap);
+int				print_c(t_pl pl, va_list *ap);
+int				print_s(t_pl pl, va_list *ap);
+int				print_p(t_pl pl, va_list *ap);
+int				print_d(t_pl pl, va_list *ap);
+int				print_u(t_pl pl, va_list *ap);
+int				print_x(t_pl pl, va_list *ap);
+char			*sp_malloc(int size);
+void			free_all(void *ptr);
 
 #endif
