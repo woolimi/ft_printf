@@ -25,7 +25,7 @@ static void	init_pl(t_pl *pl)
 static void	get_zpad_minus(t_pl *pl, char **form, int *digit)
 {
 	*digit = 0;
-	while (**form == '-' || **form == '0')
+	while (**form == '-' || **form == '0' || **form == ' ')
 	{
 		if (**form == '-')
 			pl->f_minus = 1;
@@ -42,13 +42,7 @@ static void	get_min_w(t_pl *pl, char **form, va_list *ap)
 	get_zpad_minus(pl, form, &digit);
 	while (**form != '.' && !check_conversion(**form))
 	{
-		if (**form == '-' && (pl->f_minus = 1))
-		{
-			if (digit != 0)
-				pl->min_w = digit;
-			digit = 0;
-		}
-		else if (ft_isdigit(**form))
+		if (ft_isdigit(**form))
 			digit = (digit * 10) + (**form - '0');
 		else if (**form == '*')
 		{
@@ -57,6 +51,12 @@ static void	get_min_w(t_pl *pl, char **form, va_list *ap)
 				pl->min_w = -1 * pl->min_w;
 				pl->f_minus = 1;
 			}
+			digit = 0;
+		}
+		else
+		{
+			if (digit)
+				pl->min_w = digit;
 			digit = 0;
 		}
 		(*form)++;
@@ -71,13 +71,7 @@ static void	get_precision(t_pl *pl, char **form, va_list *ap)
 	digit = 0;
 	while (!check_conversion(**form))
 	{
-		if (**form == '-' && (pl->f_minus = 1))
-		{
-			if (digit != 0)
-				pl->precise = digit;
-			digit = 0;
-		}
-		else if (ft_isdigit(**form))
+		if (ft_isdigit(**form))
 			digit = (digit * 10) + (**form - '0');
 		else if (**form == '*')
 		{

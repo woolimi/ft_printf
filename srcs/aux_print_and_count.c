@@ -47,5 +47,7 @@ int		print_and_count(t_pl pl, va_list *ap)
 		return (print_u(pl, ap));
 	if (pl.convert == 'x' || pl.convert == 'X')
 		return (print_x(pl, ap));
+	if (pl.convert == '%')
+		return (print_percent(pl, ap));
 	return (0);
 }

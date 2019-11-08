@@ -149,4 +149,14 @@ void test_s(void)
 
 	ft_printf("\n7. test zpad <-- undefined\n");
 
+	ft_printf("\n8. test s with string <-- undefined\n");
+	write(1, "----- ft_print -----\n", 21);
+	printf("\n%d\n", ft_printf("hey hey |%50.*s| hihi", -123, "longlonglonglonglong text long"));
+	write(1, "----- original -----\n", 21);
+	printf("\n%d\n", printf("hey hey |%50.*s| hihi", -123, "longlonglonglonglong text long"));
+
+	write(1, "----- ft_print -----\n", 21);
+	printf("\n%d\n", ft_printf("hey hey |%10s| hihi", null_s));
+	write(1, "----- original -----\n", 21);
+	printf("\n%d\n", printf("hey hey |%10s| hihi", null_s));
 }

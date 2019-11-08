@@ -12,13 +12,6 @@
 
 #include "ft_printf.h"
 
-static void	print_percent(int *cnt, int *i)
-{
-	write(1, "%", 1);
-	*cnt = *cnt + 1;
-	*i = *i + 1;
-}
-
 static void	print_normal(char c, int *cnt)
 {
 	write(1, &c, 1);
@@ -35,9 +28,7 @@ static int	print(char *f, va_list *ap)
 	cnt = 0;
 	while (f[i] != '\0')
 	{
-		if (f[i] == '%' && (f[i + 1] == '%'))
-			print_percent(&cnt, &i);
-		else if (f[i] == '%' && ((i > 1 && f[i - 1] != '%') || f[i + 1] != '%'))
+		if (f[i] == '%')
 		{
 			f = f + make_pl(&pl, f + i + 1, ap);
 			cnt = cnt + print_and_count(pl, ap);
@@ -56,7 +47,7 @@ int			ft_printf(const char *form, ...)
 	va_list	ap;
 
 	f = (char*)form;
-	if (check_form(f) == -1)
+	if (!check_form(f))
 		return (0);
 	va_start(ap, form);
 	cnt = print(f, &ap);

@@ -22,43 +22,32 @@ int			check_minus(char c)
 int			check_conversion(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd'
-			|| c == 'i' || c == 'u' || c == 'x' || c == 'X')
+			|| c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == '%')
 		return (c);
 	return (0);
 }
 
-static int	ret(int ck, int cnt)
-{
-	if (ck >= 2)
-		return (-1);
-	return (cnt);
-}
-
 int			check_form(char *f)
 {
-	int	st_form;
-	int	ck;
 	int	cnt;
+	int ck;
 
-	ck = 0;
-	st_form = 0;
 	cnt = 0;
+	ck = 0;
 	if (!f)
-		return (-1);
+		return (0);
 	while (*f != '\0')
 	{
-		if (*f == '%' && st_form == 0 && (st_form = 1))
-			ck++;
-		else if (*f == '%' && st_form == 1 && *(f - 1) == '%' && !(st_form = 0))
-			ck = 0;
-		else if (*f == '%' && st_form == 1 && *(f - 1) != '%')
-			return (-1);
-		else if (st_form == 1 && check_conversion(*f) && !(st_form = 0))
+		if (*f == '%' && ck == 0)
+			ck = 1;
+		else if (check_conversion(*f) && ck == 1)
 		{
 			ck = 0;
 			cnt++;
 		}
 		f++;
 	}
-	return (ret(ck, cnt));
+	if (ck == 1)
+		return (0);
+	return (1);
 }

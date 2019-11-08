@@ -12,14 +12,22 @@
 
 #include "ft_printf.h"
 
-static void	print_pad(int precise, int f_zpad)
+static void	print_pad(t_pl pl, int sign, char **ret, int i)
 {
-	if (precise != -1)
-		write(1, " ", 1);
-	else if (f_zpad == 1)
-		write(1, "0", 1);
+	if (pl.f_zpad == 1 && pl.precise == -1)
+	{
+		if (sign && (*ret)++)
+			write(1, "-", 1);
+		while (i--)
+			write(1, "0", 1);
+	}
 	else
-		write(1, " ", 1);
+	{
+		while (i--)
+			write(1, " ", 1);
+		if (sign && (*ret)++)
+			write(1, "-", 1);
+	}
 }
 
 static int	print_without_fminus(char *ret, t_pl pl, int sign)
@@ -35,10 +43,7 @@ static int	print_without_fminus(char *ret, t_pl pl, int sign)
 	p_len = (len > pl.precise) ? len : pl.precise;
 	size = ((p_len + sign > pl.min_w) ? p_len + sign : pl.min_w);
 	i = size - p_len - sign;
-	while (i--)
-		print_pad(pl.precise, pl.f_zpad);
-	if (sign)
-		write(1, &*ret++, 1);
+	print_pad(pl, sign, &ret, i);
 	i = p_len - len;
 	while (i--)
 		write(1, "0", 1);
@@ -87,7 +92,7 @@ int			print_d(t_pl pl, va_list *ap)
 	int		sign;
 
 	d = va_arg(*ap, int);
-	sign = (d > 0) ? 0 : 1;
+	sign = (d < 0) ? 1 : 0;
 	if (!(ret = ft_itoa_base(d, "0123456789", 10)))
 		return (0);
 	return (print_res(ret, pl, sign));

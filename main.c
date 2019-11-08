@@ -8,16 +8,16 @@ void test_p(void);
 void test_d(void);
 void test_u(void);
 void test_x(void);
+void test_basic(void);
 
 int main(void)
 {
+	test_basic();
 //	test_c();
 //	test_s();
 //	test_p();
 //	test_d();
 //	test_u();
 //	test_x();
-	ft_printf("%%");
-	printf("%%");
 	return (0);
 }
