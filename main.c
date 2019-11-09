@@ -12,7 +12,7 @@ void test_basic(void);
 
 int main(void)
 {
-	test_basic();
+//	test_basic();
 //	test_c();
 //	test_s();
 //	test_p();

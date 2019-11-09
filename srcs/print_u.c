@@ -12,6 +12,15 @@
 
 #include "ft_printf.h"
 
+static int	set_size(t_pl pl, int *p_len, int len, char *ret)
+{
+	if (pl.precise == 0 && *ret == '0')
+		*p_len = 0;
+	else
+		*p_len = (len > pl.precise) ? len : pl.precise;
+	return ((p_len > pl.min_w) ? p_len : pl.min_w);
+}
+
 static int	print_without_fminus(char *ret, t_pl pl)
 {
 	int len;
@@ -20,10 +29,9 @@ static int	print_without_fminus(char *ret, t_pl pl)
 	int i;
 
 	len = ft_strlen(ret);
-	p_len = (len > pl.precise) ? len : pl.precise;
-	size = (p_len > pl.min_w) ? p_len : pl.min_w;
+	size = set_size(pl, &p_len, len, ret);
 	i = size - p_len;
-	while (i--)
+	while (i-- > 0)
 	{
 		if (pl.precise != -1)
 			write(1, " ", 1);
@@ -33,9 +41,10 @@ static int	print_without_fminus(char *ret, t_pl pl)
 			write(1, " ", 1);
 	}
 	i = p_len - len;
-	while (i--)
+	while (i-- > 0)
 		write(1, "0", 1);
-	write(1, ret, len);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
 	free_all(ret);
 	return (size);
 }
@@ -48,14 +57,14 @@ static int	print_with_fminus(char *ret, t_pl pl)
 	int i;
 
 	len = ft_strlen(ret);
-	p_len = (len > pl.precise) ? len : pl.precise;
-	size = (p_len > pl.min_w) ? p_len : pl.min_w;
+	size = set_size(pl, &p_len, len, ret);
 	i = p_len - len;
-	while (i--)
+	while (i-- > 0)
 		write(1, "0", 1);
-	write(1, ret, len);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
 	i = size - p_len;
-	while (i--)
+	while (i-- > 0)
 		write(1, " ", 1);
 	free_all(ret);
 	return (size);

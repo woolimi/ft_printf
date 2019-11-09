@@ -27,6 +27,6 @@ void test_basic(void)
 	// write(1, "----- original -----\n", 21);
 	// printf("\n%d\n", printf("|%-5%|"));
 
-	printf("%05y\n");
-	ft_printf("%05y\n");
+	// printf("%05y\n");
+	// ft_printf("%05y\n");
 }

@@ -12,30 +12,26 @@
 
 #include "ft_printf.h"
 
-static void	print_ptr(char *ptr)
+static void	print_ptr(char *ptr, t_pl pl)
 {
 	write(1, "0x", 2);
-	write(1, ptr, ft_strlen(ptr));
+	if (pl.precise != 0 || *ptr != '0')
+		write(1, ptr, ft_strlen(ptr));
 }
 
 static void	print_res(char *ptr, t_pl pl, int sp)
 {
 	if (pl.f_minus)
 	{
-		print_ptr(ptr);
-		while (sp--)
+		print_ptr(ptr, pl);
+		while (sp-- > 0)
 			write(1, " ", 1);
 	}
 	else
 	{
-		while (sp--)
-		{
-			if (pl.f_zpad)
-				write(1, "0", 1);
-			else
-				write(1, " ", 1);
-		}
-		print_ptr(ptr);
+		while (sp-- > 0)
+			write(1, " ", 1);
+		print_ptr(ptr, pl);
 	}
 }
 
@@ -49,7 +45,10 @@ int			print_p(t_pl pl, va_list *ap)
 	n = (unsigned long)va_arg(*ap, void*);
 	if (!(ret = ft_itoa_base(n, "0123456789abcdef", 16)))
 		return (0);
-	len = ft_strlen(ret) + 2;
+	if (pl.precise == 0 && *ret == '0')
+		len = 0 + 2;
+	else
+		len = ft_strlen(ret) + 2;
 	size = (len > pl.min_w) ? len : pl.min_w;
 	print_res(ret, pl, size - len);
 	free_all(ret);

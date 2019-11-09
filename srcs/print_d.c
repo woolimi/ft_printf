@@ -40,14 +40,18 @@ static int	print_without_fminus(char *ret, t_pl pl, int sign)
 
 	begin = ret;
 	len = ft_strlen(ret) - sign;
-	p_len = (len > pl.precise) ? len : pl.precise;
+	if (pl.precise == 0 && *ret == '0')
+		p_len = 0;
+	else
+		p_len = (len > pl.precise) ? len : pl.precise;
 	size = ((p_len + sign > pl.min_w) ? p_len + sign : pl.min_w);
 	i = size - p_len - sign;
 	print_pad(pl, sign, &ret, i);
 	i = p_len - len;
-	while (i--)
+	while (i-- > 0)
 		write(1, "0", 1);
-	write(1, ret, len);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
 	free_all(begin);
 	return (size);
 }
@@ -62,16 +66,20 @@ static int	print_with_fminus(char *ret, t_pl pl, int sign)
 
 	begin = ret;
 	len = ft_strlen(ret) - sign;
-	p_len = (len > pl.precise) ? len : pl.precise;
+	if (pl.precise == 0 && *ret == '0')
+		p_len = 0;
+	else
+		p_len = (len > pl.precise) ? len : pl.precise;
 	size = ((p_len + sign > pl.min_w) ? p_len + sign : pl.min_w);
 	if (sign)
 		write(1, &*ret++, 1);
 	i = p_len - len;
-	while (i--)
+	while (i-- > 0)
 		write(1, "0", 1);
-	write(1, ret, len);
+	if (p_len != 0 || *ret != '0')
+		write(1, ret, len);
 	i = size - p_len - sign;
-	while (i--)
+	while (i-- > 0)
 		write(1, " ", 1);
 	free_all(begin);
 	return (size);
