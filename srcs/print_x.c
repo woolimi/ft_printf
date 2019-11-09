@@ -20,6 +20,7 @@ static int	set_size(t_pl pl, int *p_len, int len, char *ret)
 		*p_len = (len > pl.precise) ? len : pl.precise;
 	return ((*p_len > pl.min_w) ? *p_len : pl.min_w);
 }
+
 static int	print_without_fminus(char *ret, t_pl pl)
 {
 	int len;
