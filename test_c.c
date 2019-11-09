@@ -1,64 +1,104 @@
-#include "./include/ft_printf.h"
+#include <stdio.h>
+#include <unistd.h>
+
+int ft_printf(const char *form, ...);
 
 void test_c(void)
 {
-	ft_printf("##### conversion c #####\n");
+	int i;
+	i = 0;
 
-	ft_printf("\n1. test null\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%c|", 0));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%c|", 0));
+	char string[] = "string";
 
-	ft_printf("\n2. simple\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%c|", 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%c|", 't'));
+	void *ptr_1;
+	char *ptr_2;
+	int *ptr_3;
+	void *ptr_null;
+	char c;
 
-	ft_printf("\n2. test min width\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%3c|", 0));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%3c|", 0));
+	ptr_1 = string;
 
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%1c|", 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%1c|", 't'));
+	ptr_null = NULL;
 
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%5c|", 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%5c|", 't'));
+	printf("\033[1;31m");
+	printf("\n=============================================================================\n");
+	printf("******************** Test conversion c :\n\n\n");
+	printf("\033[0m;");
 
-	ft_printf("\n3. test minus\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%-1c|", 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%-1c|", 't'));
+	printf("\033[0;36m======================= TEST\033[0m 1    %%%%\n");
+	i = printf("|%c|\n", 0);
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%c|\n", 0);
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%-2c|", 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%-2c|", 't'));
+	printf("\033[0;36m======================= TEST\033[0m 2    %%%%\n");
+	i = printf("|%c|\n", 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%c|\n", 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 
-	ft_printf("\n4. test star\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%*c|", -3, 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%*c|", -3, 't'));
+	printf("\033[0;36m======================= TEST\033[0m 3    %%%%\n");
+	i = printf("|%3c|\n", 0);
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%3c|\n", 0);
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("|%-*c|", -3, 't'));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("|%-*c|", -3, 't'));
+	printf("\033[0;36m======================= TEST\033[0m 4    %%%%\n");
+	i = printf("|%1c|\n", 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%1c|\n", 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 
-	ft_printf("\n5. test zpad <-- not defined\n");
+	printf("\033[0;36m======================= TEST\033[0m 5    %%%%\n");
+	i = printf("|%5c|\n", 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%5c|\n", 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 
-	ft_printf("\n6. test c with string\n");
-	write(1, "----- ft_print -----\n", 21);
-	printf("\n%d\n", ft_printf("hey hey |%c| hihi", 0));
-	write(1, "----- original -----\n", 21);
-	printf("\n%d\n", printf("hey hey |%c| hihi", 0));
+	printf("\033[0;36m======================= TEST\033[0m 6    %%\n");
+	i = printf("|%-1c|\n", 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%-1c|\n", 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
+
+	printf("\033[0;36m======================= TEST\033[0m 7    %%\n");
+	i = printf("|%-2c|\n", 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%-2c|\n", 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
+
+	printf("\033[0;36m======================= TEST\033[0m 8    %%\n");
+	i = printf("|%*c|\n", -3, 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%*c|\n", -3, 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
+
+	printf("\033[0;36m======================= TEST\033[0m 9    %%\n");
+	i = printf("|%-*c|\n", -3, 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%-*c|\n", -3, 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
+
+	printf("\033[0;36m======================= TEST\033[0m 10    %%\n");
+	i = printf("|%*c|\n", -3, 't');
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("|%*c|\n", -3, 't');
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
+
+	printf("\033[0;36m======================= TEST\033[0m 11    %%\n");
+	i = printf("hey hey |%c| hihi\n", 0);
+	fflush(stdout);
+	printf("                                             \033[1;33mretour officiel   : %d\033[0m\n", i);
+	i = ft_printf("hey hey |%c| hihi\n", 0);
+	printf("                                             \033[1;33mretour unofficiel : %d\033[0m\n", i);
 }
